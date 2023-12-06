@@ -30,6 +30,10 @@ model dd_eps_turn
   Modelica.Blocks.Math.WrapAngle wrapAngle annotation(
     Placement(visible = true, transformation(origin = {122, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
+  connect(wrapAngle2.y, switch1.u1) annotation(
+    Line(points = {{-40, -30}, {-22, -30}, {-22, -10}, {68, -10}, {68, -22}, {78, -22}, {78, -22}}, color = {0, 0, 127}));
+  connect(wrapAngle2.y, minus180.u1) annotation(
+    Line(points = {{-40, -30}, {-32, -30}, {-32, -56}, {-60, -56}, {-60, -70}, {-48, -70}, {-48, -70}}, color = {0, 0, 127}));
   connect(h_set, wrapAngle2.u) annotation(
     Line(points = {{-100, -30}, {-64, -30}}, color = {0, 0, 127}));
   connect(wrapAngle2.y, abs1.u) annotation(
@@ -42,8 +46,6 @@ equation
     Line(points = {{-30, -70}, {70, -70}, {70, -38}, {78, -38}}, color = {0, 0, 127}));
   connect(lessEqualThreshold.y, switch1.u2) annotation(
     Line(points = {{46, -30}, {78, -30}}, color = {255, 0, 255}));
-  connect(minus180.u1, switch1.u1) annotation(
-    Line(points = {{-48, -70}, {-70, -70}, {-70, 0}, {70, 0}, {70, -22}, {78, -22}}, color = {0, 0, 127}));
   connect(c1.y, p_sign.u1) annotation(
     Line(points = {{-37, 52}, {56, 52}}, color = {0, 0, 127}));
   connect(cm1.y, p_sign.u3) annotation(

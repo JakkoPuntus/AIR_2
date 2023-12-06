@@ -1,15 +1,17 @@
 model transformation
+  parameter Real R = 0.1;
+  parameter Real L = 0.2;
   Modelica.Blocks.Interfaces.RealInput v_set annotation(
     Placement(visible = true, transformation(origin = {-100, 60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-90, 56}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput w_set annotation(
     Placement(visible = true, transformation(origin = {-100, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-92, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Modelica.Blocks.Math.Gain vs_g(k = 1/R)  annotation(
     Placement(visible = true, transformation(origin = {-50, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Gain ws_g(k = 1/R) annotation(
+  Modelica.Blocks.Math.Gain ws_g(k = L / (2 * R)) annotation(
     Placement(visible = true, transformation(origin = {-52, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Add vr_add annotation(
     Placement(visible = true, transformation(origin = {-10, -54}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Math.Add vl_add annotation(
+  Modelica.Blocks.Math.Add vl_add(k2 = -1)  annotation(
     Placement(visible = true, transformation(origin = {-10, 54}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealOutput vl annotation(
     Placement(visible = true, transformation(origin = {110, 54}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {78, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
