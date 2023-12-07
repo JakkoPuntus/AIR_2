@@ -10,8 +10,8 @@ model dd_eps_turn
   Modelica.Blocks.Sources.Constant c180deg(k = 3.1415)  annotation(
     Placement(visible = true, transformation(origin = {-90, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Feedback minus180 annotation(
-    Placement(visible = true, transformation(origin = {-40, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold(threshold = 3.1415/2)  annotation(
+    Placement(transformation(origin = {-24, -70}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Logical.LessEqualThreshold lessEqualThreshold(threshold = 1.5707)  annotation(
     Placement(visible = true, transformation(origin = {34, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Logical.Switch switch1 annotation(
     Placement(visible = true, transformation(origin = {90, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -30,28 +30,20 @@ model dd_eps_turn
   Modelica.Blocks.Math.WrapAngle wrapAngle annotation(
     Placement(visible = true, transformation(origin = {122, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
-  connect(wrapAngle2.y, switch1.u1) annotation(
-    Line(points = {{-40, -30}, {-22, -30}, {-22, -10}, {68, -10}, {68, -22}, {78, -22}, {78, -22}}, color = {0, 0, 127}));
-  connect(wrapAngle2.y, minus180.u1) annotation(
-    Line(points = {{-40, -30}, {-32, -30}, {-32, -56}, {-60, -56}, {-60, -70}, {-48, -70}, {-48, -70}}, color = {0, 0, 127}));
   connect(h_set, wrapAngle2.u) annotation(
     Line(points = {{-100, -30}, {-64, -30}}, color = {0, 0, 127}));
   connect(wrapAngle2.y, abs1.u) annotation(
     Line(points = {{-41, -30}, {-19, -30}}, color = {0, 0, 127}));
-  connect(c180deg.y, minus180.u2) annotation(
-    Line(points = {{-78, -90}, {-40, -90}, {-40, -78}}, color = {0, 0, 127}));
   connect(abs1.y, lessEqualThreshold.u) annotation(
     Line(points = {{6, -30}, {22, -30}}, color = {0, 0, 127}));
   connect(minus180.y, switch1.u3) annotation(
-    Line(points = {{-30, -70}, {70, -70}, {70, -38}, {78, -38}}, color = {0, 0, 127}));
+    Line(points = {{-15, -70}, {70, -70}, {70, -38}, {78, -38}}, color = {0, 0, 127}));
   connect(lessEqualThreshold.y, switch1.u2) annotation(
     Line(points = {{46, -30}, {78, -30}}, color = {255, 0, 255}));
   connect(c1.y, p_sign.u1) annotation(
     Line(points = {{-37, 52}, {56, 52}}, color = {0, 0, 127}));
   connect(cm1.y, p_sign.u3) annotation(
     Line(points = {{-38, 16}, {-18, 16}, {-18, 36}, {56, 36}}, color = {0, 0, 127}));
-  connect(lessEqualThreshold.y, p_sign.u2) annotation(
-    Line(points = {{46, -30}, {50, -30}, {50, 44}, {56, 44}}, color = {255, 0, 255}));
   connect(p_set, p_mult.u1) annotation(
     Line(points = {{-100, 80}, {88, 80}, {88, 86}, {108, 86}}, color = {0, 0, 127}));
   connect(p_sign.y, p_mult.u2) annotation(
@@ -62,6 +54,14 @@ equation
     Line(points = {{102, -30}, {110, -30}}, color = {0, 0, 127}));
   connect(wrapAngle.y, h_out) annotation(
     Line(points = {{134, -30}, {160, -30}}, color = {0, 0, 127}));
+  connect(wrapAngle2.y, minus180.u1) annotation(
+    Line(points = {{-40, -30}, {-32, -30}, {-32, -70}}, color = {0, 0, 127}));
+  connect(c180deg.y, minus180.u2) annotation(
+    Line(points = {{-78, -90}, {-24, -90}, {-24, -78}}, color = {0, 0, 127}));
+  connect(wrapAngle2.y, switch1.u1) annotation(
+    Line(points = {{-40, -30}, {-30, -30}, {-30, -10}, {68, -10}, {68, -22}, {78, -22}}, color = {0, 0, 127}));
+  connect(lessEqualThreshold.y, p_sign.u2) annotation(
+    Line(points = {{46, -30}, {50, -30}, {50, 44}, {56, 44}}, color = {255, 0, 255}));
 
 annotation(
     uses(Modelica(version = "4.0.0")),
