@@ -8,7 +8,7 @@ model platform
  parameter Real Tj=0.01;
  parameter Real Kp=Tm*Ke/Tj;
  parameter Real Ki=Ke/Tj;
- parameter Real Kd=1;
+ parameter Real Kd=10;
  parameter Real Kh=100;
 
 
@@ -33,11 +33,9 @@ model platform
  Modelica.Blocks.Continuous.PI PI_r(T = Kp / Ki, k = Kp)  annotation(
     Placement(visible = true, transformation(origin = {158, -8}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
  Modelica.Blocks.Sources.TimeTable timeTable1(table = [0, 0; 2.5, 20; 5, 40; 7.5, 20; 10, 0])  annotation(
-    Placement(visible = true, transformation(origin = {-110, 64}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(transformation(origin = {-130, 50}, extent = {{-10, -10}, {10, 10}})));
  Modelica.Blocks.Sources.TimeTable timeTable2(startTime = 0, table = [0, 0; 2.5, -20; 5, -40; 7.5, -20; 10, 0])  annotation(
-    Placement(transformation(origin = {-110, 12}, extent = {{-10, -10}, {10, 10}})));
- Modelica.Blocks.Interaction.Show.RealValue realValue annotation(
-    Placement(transformation(origin = {260, 26}, extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin = {-130, 12}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(dd_eps_turn1.h_out, gain1.u) annotation(
     Line(points = {{1, 5}, {10, 5}, {10, 4}, {18, 4}}, color = {0, 0, 127}));
@@ -48,7 +46,7 @@ equation
   connect(dd_eps1.e_dst, dd_eps_turn1.p_set) annotation(
     Line(points = {{-56, 16}, {-40, 16}, {-40, 14}, {-24, 14}}, color = {0, 0, 127}));
   connect(timeTable1.y, dd_eps1.x_set) annotation(
-    Line(points = {{-98, 64}, {-94, 64}, {-94, 18}, {-82, 18}, {-82, 18}}, color = {0, 0, 127}));
+    Line(points = {{-119, 50}, {-94, 50}, {-94, 18}, {-82, 18}}, color = {0, 0, 127}));
   connect(PI_l.y, robot1.Ul) annotation(
     Line(points = {{169, 30}, {180, 30}, {180, 20}, {192, 20}}, color = {0, 0, 127}));
   connect(PI_r.y, robot1.Ur) annotation(
@@ -61,23 +59,21 @@ equation
     Line(points = {{41, 4}, {52, 4}, {52, 18}, {67, 18}}, color = {0, 0, 127}));
   connect(gain.y, transformation1.v_set) annotation(
     Line(points = {{42, 42}, {50, 42}, {50, 30}, {67, 30}}, color = {0, 0, 127}));
- connect(robot1.x_out, dd_eps1.x) annotation(
+  connect(robot1.x_out, dd_eps1.x) annotation(
     Line(points = {{222, 18}, {264, 18}, {264, -102}, {-94, -102}, {-94, 6}, {-82, 6}}, color = {0, 0, 127}));
- connect(robot1.y_out, dd_eps1.y) annotation(
+  connect(robot1.y_out, dd_eps1.y) annotation(
     Line(points = {{222, 10}, {254, 10}, {254, -94}, {-88, -94}, {-88, 0}, {-82, 0}}, color = {0, 0, 127}));
- connect(robot1.heading, dd_eps1.heading) annotation(
+  connect(robot1.heading, dd_eps1.heading) annotation(
     Line(points = {{222, 6}, {240, 6}, {240, -86}, {-82, -86}, {-82, -4}}, color = {0, 0, 127}));
- connect(transformation1.vr, e_r.u1) annotation(
+  connect(transformation1.vr, e_r.u1) annotation(
     Line(points = {{86, 18}, {92, 18}, {92, -8}, {116, -8}}, color = {0, 0, 127}));
- connect(transformation1.vl, e_l.u1) annotation(
+  connect(transformation1.vl, e_l.u1) annotation(
     Line(points = {{86, 30}, {118, 30}}, color = {0, 0, 127}));
- connect(robot1.v, realValue.numberPort) annotation(
-    Line(points = {{222, 14}, {229.25, 14}, {229.25, 26}, {248.5, 26}}, color = {0, 0, 127}));
- connect(dd_eps1.y_set, timeTable2.y) annotation(
-    Line(points = {{-82, 12}, {-98, 12}}, color = {0, 0, 127}));
- connect(robot1.vr, e_r.u2) annotation(
+  connect(dd_eps1.y_set, timeTable2.y) annotation(
+    Line(points = {{-82, 12}, {-119, 12}}, color = {0, 0, 127}));
+  connect(robot1.vr, e_r.u2) annotation(
     Line(points = {{222, 2}, {224, 2}, {224, -40}, {124, -40}, {124, -16}}, color = {0, 0, 127}));
- connect(e_l.u2, robot1.vl) annotation(
+  connect(e_l.u2, robot1.vl) annotation(
     Line(points = {{126, 38}, {126, 54}, {226, 54}, {226, 22}, {222, 22}}, color = {0, 0, 127}));
   annotation(
     uses(Modelica(version = "4.0.0")),
